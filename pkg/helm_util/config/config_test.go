@@ -5,7 +5,7 @@ import (
 )
 
 func TestLoadConfigYAML(t *testing.T) {
-	config := loadConfigYAML("test-data/config-01.yaml")
+	config := LoadConfigYAML("test-data/config-01.yaml")
 	if len(config.Repositories) != 2 {
 		t.Errorf("Expected 2 repositories but found %d", len(config.Repositories))
 	}

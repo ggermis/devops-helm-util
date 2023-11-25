@@ -55,10 +55,30 @@ func Info(args ...interface{}) {
 	logger.Info(args...)
 }
 
+func Infof(format string, args ...interface{}) {
+	logger.Infof(format, args...)
+}
+
 func Debug(args ...interface{}) {
 	logger.Debug(args...)
 }
 
+func Debugf(format string, args ...interface{}) {
+	logger.Debugf(format, args...)
+}
+
+func Warn(args ...interface{}) {
+	logger.Warn(args...)
+}
+
+func Warnf(format string, args ...interface{}) {
+	logger.Warnf(format, args...)
+}
+
 func Panic(args ...interface{}) {
 	logger.Panic(args...)
+}
+
+func Panicf(format string, args ...interface{}) {
+	logger.Panicf(format, args...)
 }
