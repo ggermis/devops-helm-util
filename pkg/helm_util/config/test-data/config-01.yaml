@@ -1,0 +1,5 @@
+repositories:
+  - name: autoscaler
+    url: https://kubernetes.github.io/autoscaler
+  - name: bitnami
+    url: https://charts.bitnami.com/bitnami
