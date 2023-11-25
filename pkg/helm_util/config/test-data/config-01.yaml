@@ -3,3 +3,11 @@ repositories:
     url: https://kubernetes.github.io/autoscaler
   - name: bitnami
     url: https://charts.bitnami.com/bitnami
+
+charts:
+  - name: cluster-autoscaler
+    repository: autoscaler
+  - name: rabbitmq-cluster-operator
+    repository: bitnamu
+  - name: prometheus
+    repository: bitnami

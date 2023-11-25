@@ -9,11 +9,17 @@ import (
 
 type Config struct {
 	Repositories []Repository `yaml:"repositories"`
+	Charts       []Chart      `yaml:"charts"`
 }
 
 type Repository struct {
 	Name string `yaml:"name"`
 	Url  string `yaml:"url"`
+}
+
+type Chart struct {
+	Name       string `yaml:"name"`
+	Repository string `yaml:"repository"`
 }
 
 func loadConfigYAML(configFile string) *Config {
