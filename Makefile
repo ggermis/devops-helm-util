@@ -5,11 +5,10 @@ ifdef BUILD_NR
 VERSION:="$(VERSION).$(BUILD_NR)"
 endif
 
+IMAGE_NAME := germis/${PROJECT_NAME}
 
-DIST_DIR := dist
-LDFLAGS  := -ldflags "-s -w -X github.com/ggermis/helm-util/pkg/helm_util/version.version=${VERSION}"
 
-all: clean build test
+all: build
 
 
 .PHONY: project-name
@@ -22,18 +21,24 @@ version:
 
 .PHONY: clean
 clean:
-	@rm -rf "${DIST_DIR}"
+	-@docker rmi -f ${IMAGE_NAME}:${VERSION}
+	-@docker rmi -f ${IMAGE_NAME}:latest
+	-@docker system prune -f
 
 .PHONY: build
 build:
-	@mkdir -p dist
-	@go build ${LDFLAGS} -o "${DIST_DIR}/$(PROJECT_ALIAS)"
+	@docker build --rm -t ${IMAGE_NAME}:${VERSION} -t ${IMAGE_NAME}:latest --build-arg VERSION=${VERSION} .
 
 .PHONY: test
 test:
 	#@mkdir -p test-results
 	@go install github.com/jstemmer/go-junit-report@latest
 	#@go test -v ./... 2>&1 | go-junit-report -set-exit-code > test-results/tests.xml
+
+.PHONY: publish
+publish:
+	-@docker push ${IMAGE_NAME}:${VERSION}
+	-@docker push ${IMAGE_NAME}:latest
 
 .PHONY: install
 install:

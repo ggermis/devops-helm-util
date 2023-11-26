@@ -21,7 +21,6 @@ type HelmSearchOutput []struct {
 }
 
 func createTempDirectory() {
-
 	logger.Debug("Creating temp directory")
 	tmpDir, err := os.MkdirTemp("", fmt.Sprintf("%s-*", tmpDirPrefix))
 	if err != nil {
@@ -70,9 +69,8 @@ func ShowLatestChartVersions() {
 	addHelmRepositories()
 	updateHelmChartRepositories()
 
-	var version string
 	for _, chart := range config.Config.Charts {
-		logger.Debugf("Finding latest version for chart '%s'", chart.Name)
+		logger.Debugf("Finding latest version for chart '%s/%s'", chart.Repository, chart.Name)
 		var output HelmSearchOutput
 		cmd := helmSearchRepoCommand(chart)
 		logger.Debugf("Running command '%s'", cmd)
@@ -85,8 +83,8 @@ func ShowLatestChartVersions() {
 		if err := yaml.Unmarshal(out, &output); err != nil {
 			logger.Panic(err)
 		}
-		version = output[0].Version
-		fmt.Println(fmt.Sprintf("%s: %s", chart.Name, version))
+		version := output[0].Version
+		fmt.Println(fmt.Sprintf("%s/%s: %s", chart.Repository, chart.Name, version))
 	}
 }
 
