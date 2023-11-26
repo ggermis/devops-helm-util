@@ -7,6 +7,9 @@ repositories:
 charts:
   - name: cluster-autoscaler
     repository: autoscaler
+    aliases:
+      - alternate-name-1
+      - alternate-name-2
   - name: rabbitmq-cluster-operator
     repository: bitnamu
   - name: prometheus

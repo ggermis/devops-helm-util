@@ -19,8 +19,9 @@ type RepositoryYAML struct {
 }
 
 type ChartYAML struct {
-	Name       string `yaml:"name"`
-	Repository string `yaml:"repository"`
+	Name       string   `yaml:"name"`
+	Repository string   `yaml:"repository"`
+	Aliases    []string `yaml:"aliases"`
 }
 
 var defaultConfig = &ConfigYAML{

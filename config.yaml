@@ -13,6 +13,22 @@ repositories:
     url: https://kiali.org/helm-charts/
   - name: harbor
     url: https://helm.goharbor.io
+  - name: vmware-tanzu
+    url: https://vmware-tanzu.github.io/helm-charts
+  - name: jaeger
+    url: https://jaegertracing.github.io/helm-charts
+  - name: elastic
+    url: https://helm.elastic.co
+  - name: influx
+    url: https://helm.influxdata.com
+  - name: external-secrets
+    url: https://charts.external-secrets.io
+  - name: grafana
+    url: https://grafana.github.io/helm-charts
+  - name: strimzi
+    url: https://strimzi.io/charts/
+  - name: hazelcast
+    url: https://hazelcast-charts.s3.amazonaws.com/
 
 charts:
   - name: cluster-autoscaler
@@ -31,7 +47,31 @@ charts:
     repository: fluent
   - name: kiali
     repository: kiali
+  - name: hazelcast-platform-operator
+    repository: hazelcast
+    aliases:
+      - hazelcast-operator
+  - name: strimzi-kafka-operator
+    repository: strimzi
+    aliases:
+      - kafka-operator
   - name: harbor
     repository: harbor
+  - name: grafana
+    repository: grafana
+  - name: influxdb2
+    repository: influx
+    aliases:
+      - influxdb
+  - name: velero
+    repository: vmware-tanzu
+  - name: jaeger
+    repository: jaeger
+  - name: elasticsearch
+    repository: elastic
+  - name: filebeat
+    repository: elastic
+  - name: metricbeat
+    repository: elastic
 
 

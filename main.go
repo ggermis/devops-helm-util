@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/ggermis/helm-util/cmd"
-	"github.com/ggermis/helm-util/pkg/helm_util/charts"
 	"os"
 	"os/signal"
 )
@@ -13,7 +12,6 @@ func main() {
 	signal.Notify(c, os.Interrupt)
 	go func() {
 		for range c {
-			charts.CleanupTempDirectory()
 			os.Exit(1)
 		}
 	}()

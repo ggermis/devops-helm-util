@@ -29,10 +29,14 @@ repositories:
 charts:
   - name: cluster-autoscaler
     repository: autoscaler
+    aliases:
+      - alternate-name-1
+      - alternate-name-2    
   - name: rabbitmq-cluster-operator
     repository: bitnami
 ```
 
+In the `aliases` section is optional. You can provide alternative names for the chart as it is known on your clusters (ie. you changed the name during installation). This information is used when charts are listed from a live cluster so that we can match them
 
 You can show what config file is currently loaded by using the following command
 
@@ -61,9 +65,19 @@ Actions can be performed against helm charts
 * find all helm charts installed on a cluster and check whether a newer version is available
 
 ```bash
-$ docker run -it --rm -v ${PWD}/config.yaml:/config/charts.yaml germis/helm-util charts show -d
+$ docker run -it --rm \
+  -v ${PWD}/config.yaml:/config/charts.yaml \
+  germis/helm-util charts versions -d
 ```
+To be able to list installed helm charts we need to pass a valid `kubeconfig` file to the docker instance and point the `$KUBECONFIG` environment variable to it
 
+```bash
+$ docker run -it --rm \
+  -e KUBECONFIG=/config/kubeconfig \
+  -v ${HOME}/.kube/kubeconfig:/config/kubeconfig \
+  -v ${PWD}/config.yaml:/config/charts.yaml \
+  germis/helm-util charts versions --live -d
+```
 
 ## Development
 
@@ -73,4 +87,5 @@ Dependencies that were added to the module
 $ go get github.com/spf13/cobra
 $ go get github.com/sirupsen/logrus
 $ go get gopkg.in/yaml.v3
+$ go get github.com/google/uuid
 ```

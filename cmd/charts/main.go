@@ -7,6 +7,6 @@ func NewChartsCmd() *cobra.Command {
 		Use:   "charts",
 		Short: "inspect the configuration",
 	}
-	chartsCmd.AddCommand(newShowCmd())
+	chartsCmd.AddCommand(newVersionsCmd())
 	return chartsCmd
 }
