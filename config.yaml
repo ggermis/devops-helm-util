@@ -33,10 +33,6 @@ repositories:
 charts:
   - name: cluster-autoscaler
     repository: autoscaler
-  - name: rabbitmq-cluster-operator
-    repository: bitnami
-  - name: prometheus
-    repository: bitnami
   - name: keycloak
     repository: codecentric
   - name: descheduler
@@ -69,6 +65,10 @@ charts:
     repository: jaeger
   - name: elasticsearch
     repository: elastic
+  - name: rabbitmq-cluster-operator
+    repository: bitnami
+  - name: prometheus
+    repository: bitnami
   - name: filebeat
     repository: elastic
   - name: metricbeat

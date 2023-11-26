@@ -66,17 +66,17 @@ Actions can be performed against helm charts
 
 ```bash
 $ docker run -it --rm \
-  -v ${PWD}/config.yaml:/config/charts.yaml \
-  germis/helm-util charts versions -d
+    -v ${PWD}/config.yaml:/config/charts.yaml \
+    germis/helm-util charts versions -d
 ```
 To be able to list installed helm charts we need to pass a valid `kubeconfig` file to the docker instance and point the `$KUBECONFIG` environment variable to it
 
 ```bash
 $ docker run -it --rm \
-  -e KUBECONFIG=/config/kubeconfig \
-  -v ${HOME}/.kube/kubeconfig:/config/kubeconfig \
-  -v ${PWD}/config.yaml:/config/charts.yaml \
-  germis/helm-util charts versions --live -d
+    -e KUBECONFIG=/config/kubeconfig \
+    -v ${HOME}/.kube/kubeconfig:/config/kubeconfig \
+    -v ${PWD}/config.yaml:/config/charts.yaml \
+    germis/helm-util charts versions --live -d
 ```
 
 ## Development
