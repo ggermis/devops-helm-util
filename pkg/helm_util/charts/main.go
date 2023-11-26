@@ -89,7 +89,7 @@ func findLatestVersionOfHelmChart(chartName string) (detailedChartInfo, bool) {
 	if chartFound {
 		repository, repositoryFound := findRepositoryByChart(chart)
 		if repositoryFound {
-			tmpRepositoryYaml = fmt.Sprintf("%s/repositry-%s.yaml", os.TempDir(), uuid.New().String())
+			tmpRepositoryYaml = fmt.Sprintf("%s/repository-%s.yaml", os.TempDir(), uuid.New().String())
 			addHelmRepository(repository)
 			updateRepositories()
 			return findLatestVersionInRepo(chart), true
@@ -134,26 +134,26 @@ func findAllInstalledHelmCharts() []detailedChartInfo {
 }
 
 func findRepositoryByChart(chart config.ChartYAML) (config.RepositoryYAML, bool) {
-	logger.Debugf("Looking for repository with name '%s'", chart.Repository)
+	logger.Debugf("Looking for repository with name '%s' in YAML config", chart.Repository)
 	for _, repository := range config.Config.Repositories {
 		if chart.Repository == repository.Name {
-			logger.Debugf("Found repository '%s'", repository.Name)
+			logger.Debugf("Found repository '%s' in YAML config", repository.Name)
 			return repository, true
 		}
 	}
-	logger.Debugf("Unable to find repository with name '%s'", chart.Repository)
+	logger.Debugf("Unable to find repository with name '%s' in YAML config", chart.Repository)
 	return config.RepositoryYAML{}, false
 }
 
 func findChartByNameInConfig(name string) (config.ChartYAML, bool) {
-	logger.Debugf("Looking for chart with name '%s'", name)
+	logger.Debugf("Looking for chart with name '%s' in YAML config", name)
 	for _, chart := range config.Config.Charts {
 		if (chart.Name == name) || slices.Contains(chart.Aliases, name) {
-			logger.Debugf("Found chart '%s' in config for '%s'", chart.Name, name)
+			logger.Debugf("Found chart '%s' in YAML config for '%s'", chart.Name, name)
 			return chart, true
 		}
 	}
-	logger.Debugf("No chart with name '%s' found in config. Returning empty chart", name)
+	logger.Debugf("No chart with name '%s' found in YAML config. Returning empty chart", name)
 	return config.ChartYAML{Name: name}, false
 }
 
