@@ -31,8 +31,8 @@ build:
 
 .PHONY: test
 test:
-	#@mkdir -p test-results
 	@go install github.com/jstemmer/go-junit-report@latest
+	#@mkdir -p test-results
 	#@go test -v ./... 2>&1 | go-junit-report -set-exit-code > test-results/tests.xml
 
 .PHONY: publish

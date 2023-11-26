@@ -19,6 +19,7 @@ var rootCmd = &cobra.Command{
 func init() {
 	rootCmd.PersistentFlags().BoolVarP(&cli.Debug, "debug", "d", false, "Show debug logging")
 	rootCmd.PersistentFlags().StringVarP(&cli.ConfigFile, "config-file", "c", "", "Config file to load")
+	rootCmd.PersistentFlags().BoolVar(&cli.Colour, "colour", true, "Use coloured output")
 
 	rootCmd.AddCommand(version_cmd.NewVersionCmd())
 	rootCmd.AddCommand(config_cmd.NewConfigCmd())

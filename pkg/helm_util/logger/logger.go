@@ -29,18 +29,22 @@ type formatter struct {
 }
 
 func (f *formatter) Format(entry *logrus.Entry) ([]byte, error) {
-	var levelColor int
-	switch entry.Level {
-	case logrus.DebugLevel, logrus.TraceLevel:
-		levelColor = 34 // blue
-	case logrus.WarnLevel:
-		levelColor = 33 // yellow
-	case logrus.ErrorLevel, logrus.FatalLevel, logrus.PanicLevel:
-		levelColor = 31 // red
-	default:
-		levelColor = 32 // cyan
+	if cli.Colour {
+		var levelColor int
+		switch entry.Level {
+		case logrus.DebugLevel, logrus.TraceLevel:
+			levelColor = 34 // blue
+		case logrus.WarnLevel:
+			levelColor = 33 // yellow
+		case logrus.ErrorLevel, logrus.FatalLevel, logrus.PanicLevel:
+			levelColor = 31 // red
+		default:
+			levelColor = 32 // cyan
+		}
+		return []byte(fmt.Sprintf("\u001B[1;%dm[%s] - %s - %s\u001B[0m\n", levelColor, entry.Time.Format(f.TimestampFormat), strings.ToUpper(entry.Level.String()), entry.Message)), nil
+	} else {
+		return []byte(fmt.Sprintf("[%s] - %s - %s\n", entry.Time.Format(f.TimestampFormat), strings.ToUpper(entry.Level.String()), entry.Message)), nil
 	}
-	return []byte(fmt.Sprintf("\u001B[1;%dm[%s] - %-5s - %s\u001B[0m\n", levelColor, entry.Time.Format(f.TimestampFormat), strings.ToUpper(entry.Level.String()), entry.Message)), nil
 }
 
 func SetLogLevel() {
