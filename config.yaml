@@ -1,0 +1,37 @@
+repositories:
+  - name: autoscaler
+    url: https://kubernetes.github.io/autoscaler
+  - name: bitnami
+    url: https://charts.bitnami.com/bitnami
+  - name: codecentric
+    url: https://codecentric.github.io/helm-charts
+  - name: descheduler
+    url: https://kubernetes-sigs.github.io/descheduler/
+  - name: fluent
+    url: https://fluent.github.io/helm-charts
+  - name: kiali
+    url: https://kiali.org/helm-charts/
+  - name: harbor
+    url: https://helm.goharbor.io
+
+charts:
+  - name: cluster-autoscaler
+    repository: autoscaler
+  - name: rabbitmq-cluster-operator
+    repository: bitnami
+  - name: prometheus
+    repository: bitnami
+  - name: keycloak
+    repository: codecentric
+  - name: descheduler
+    repository: descheduler
+  - name: fluent-bit
+    repository: fluent
+  - name: fluentd
+    repository: fluent
+  - name: kiali
+    repository: kiali
+  - name: harbor
+    repository: harbor
+
+
